@@ -55,10 +55,10 @@ function Contact() {
             <p>
               {t("contact_email")}:{" "}
               <a
-                href="mailto:petafipedjaradic@gmail.com"
+                href="mailto:prweb021@gmail.com"
                 className="text-blue-400 hover:underline"
               >
-                petafipedjaradic@gmail.com
+                prweb021@gmail.com
               </a>
             </p>
           </div>
