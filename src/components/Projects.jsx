@@ -4,7 +4,7 @@ import { FaHtml5, FaCss3Alt, FaJsSquare, FaReact, FaNodeJs } from "react-icons/f
 import { SiTailwindcss, SiExpress, SiEjs, SiMongodb, SiMysql } from "react-icons/si";
 import Carousel from "./Carousel";
 
-import onlineShop from "../assets/onlineShoppp.png";
+import onlineShop from "../assets/nekretnineNsS.png";
 import hexa from "../assets/hexa.png";
 import event from "../assets/event.jpeg";
 import todo from "../assets/todo_app.jpeg";
@@ -27,12 +27,12 @@ const projects = [
     github: "https://github.com/Djapedjape123/todo_app",
   },
   {
-    name: "Online Shop",
-    description: "Projekat online prodavnice kreiran u ReactJS-u.",
-    technologies: ["ReactJS", "TailwindCSS"],
+    name: "Nekretnine",
+    description: "Projekat za agenciju za nekretnine, rađen u ReactJS-u,TailwindCSS-u,NodeJS-u i ExpressJS-u.",
+    technologies: ["ReactJS", "TailwindCSS", "NodeJS", "ExpressJS"],
     image: onlineShop,
-    demo: "https://online-shop-eight-nu.vercel.app/",
-    github: "https://github.com/Djapedjape123/onlineShop",
+    demo: "https://www.serbesnekretnine.com/",
+    github: "https://github.com/Djapedjape123/nekretnineNs",
   },
   {
     name: "E-Comerc Event App",
