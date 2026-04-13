@@ -8,8 +8,25 @@ import onlineShop from "../assets/nekretnineNsS.png";
 import hexa from "../assets/hexa.png";
 import event from "../assets/event.jpeg";
 import todo from "../assets/todo_app.jpeg";
+import masine from "../assets/Masine.png";
 
 const projects = [
+  {
+    name: "Masine.ai",
+    description: "Projekat za prodaju velikih gradjaviskih masina, rađen u ReactJS-u,TailwindCSS-u",
+    technologies: ["ReactJS", "TailwindCSS"],
+    image: masine,
+    site: "https://masine.ai/",
+    github: "https://github.com/Djapedjape123/goga",
+  },
+  {
+    name: "Nekretnine",
+    description: "Projekat za agenciju za nekretnine, rađen u ReactJS-u,TailwindCSS-u,NodeJS-u i ExpressJS-u.",
+    technologies: ["ReactJS", "TailwindCSS", "NodeJS", "ExpressJS"],
+    image: onlineShop,
+    site: "https://www.serbesnekretnine.com/",
+    github: "https://github.com/Djapedjape123/nekretnineNs",
+  },
   {
     name: "Social-Network HEXA",
     description: "Društvena mreža inspirisana Twitter-om koju sam pravio koristeći HTML, CSS i JavaScript.",
@@ -27,21 +44,14 @@ const projects = [
     github: "https://github.com/Djapedjape123/todo_app",
   },
   {
-    name: "Nekretnine",
-    description: "Projekat za agenciju za nekretnine, rađen u ReactJS-u,TailwindCSS-u,NodeJS-u i ExpressJS-u.",
-    technologies: ["ReactJS", "TailwindCSS", "NodeJS", "ExpressJS"],
-    image: onlineShop,
-    demo: "https://www.serbesnekretnine.com/",
-    github: "https://github.com/Djapedjape123/nekretnineNs",
-  },
-  {
     name: "E-Comerc Event App",
     description: "Sajt za organizaciju i prodaju događaja, rađen u backend tehnologijama.",
     technologies: ["NodeJS", "ExpressJS", "EJS", "MongoDB"],
     image: event,
-    demo: "https://eventapp.zile028.com/auth/login",
     github: "https://github.com/zile028/event_app",
   },
+  
+  
 ];
 
 const techIcons = {
@@ -131,6 +141,17 @@ function Projects() {
                       className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-full text-white font-semibold shadow-lg shadow-blue-600/50 transition-colors"
                     >
                       Demo
+                    </a>
+                  )}
+
+                  {project.site && (
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-full text-white font-semibold shadow-lg shadow-blue-600/50 transition-colors"
+                    >
+                      Site
                     </a>
                   )}
 
