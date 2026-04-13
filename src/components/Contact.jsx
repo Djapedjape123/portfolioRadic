@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FaInstagram, FaGithub, FaLinkedin } from "react-icons/fa";
-import { FaLocationDot } from "react-icons/fa6";
-import { BsFillTelephoneInboundFill } from "react-icons/bs";
-import { MdEmail } from "react-icons/md";
+import { FaLocationDot, FaEnvelope, FaPhone } from "react-icons/fa6"; // Koristimo uniformnije ikonice
 import { useTranslation } from "react-i18next";
 
 function Contact() {
@@ -22,139 +20,150 @@ function Contact() {
 
     const data = await response.json();
     setResult(data.success ? t("contact_success") : t("contact_error"));
+    if(data.success) event.target.reset(); // Resetuje formu nakon slanja
   };
 
   return (
     <section
       id="contact"
-      className=" bg-gradient-to-b from-gray-900 to-black text-white px-6 md:px-20 py-16 flex flex-col items-center justify-center gap-12"
+      className="bg-gradient-to-b from-gray-900 to-black text-white px-6 md:px-20 py-24 flex flex-col items-center justify-center overflow-hidden"
     >
-      <motion.h2
-        className="text-4xl font-bold text-blue-500 "
-        initial={{ opacity: 0, y: -30 }}
+      {/* Naslov sa modernijim borderom */}
+      <motion.div 
+        className="text-center mb-16"
+        initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 3 }}
+        transition={{ duration: 0.8 }}
         viewport={{ once: true }}
       >
-        {t("contact_title")}
-      </motion.h2>
+        <h2 className="text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600 mb-4">
+          {t("contact_title")}
+        </h2>
+        <div className="h-1 w-20 bg-blue-500 mx-auto rounded-full" />
+      </motion.div>
 
-      <motion.div
-        className="flex flex-col md:flex-row gap-12 items-center justify-center"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 3, delay: 0.2 }}
-        viewport={{ once: true }}
-      >
-        {/* Info */}
-        <div className="flex flex-col  gap-4 max-w-md">
-          <p className="text-lg">{t("contact_reach")}</p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full max-w-6xl">
+        
+        {/* INFO SEKCIJA - Glassmorphism kartica */}
+        <motion.div
+          className="flex flex-col justify-center space-y-8 p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl"
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <div>
+            <h3 className="text-2xl font-semibold mb-2">{t("contact_reach")}</h3>
+            <p className="text-gray-400">Otvoren sam za nove prilike i saradnje. Pišite mi!</p>
+          </div>
 
-          <div className="flex items-center gap-3">
-            <MdEmail color="gray" size={20} />
-            <p>
-              {t("contact_email")}:{" "}
-              <a
-                href="mailto:prweb021@gmail.com"
-                className="text-blue-400 hover:underline"
-              >
+          <div className="space-y-6">
+            <div className="flex items-center gap-4 group">
+              <div className="p-3 bg-blue-500/10 rounded-lg group-hover:bg-blue-500/20 transition-colors">
+                <FaEnvelope className="text-blue-400 text-xl" />
+              </div>
+              <a href="mailto:prweb021@gmail.com" className="text-gray-300 hover:text-white transition-colors">
                 prweb021@gmail.com
               </a>
-            </p>
-          </div>
+            </div>
 
-          <div className="flex items-center gap-3">
-            <BsFillTelephoneInboundFill color="blue" size={20} />
-            <p>
-              {t("contact_phone")}:{" "}
-              <a
-                href="tel:+381612123525"
-                className="text-blue-400 hover:underline"
-              >
-                +381 612123525
+            <div className="flex items-center gap-4 group">
+              <div className="p-3 bg-blue-500/10 rounded-lg group-hover:bg-blue-500/20 transition-colors">
+                <FaPhone className="text-blue-400 text-xl" />
+              </div>
+              <a href="tel:+381612123525" className="text-gray-300 hover:text-white transition-colors">
+                +381 612 123 525
               </a>
-            </p>
+            </div>
+
+            <div className="flex items-center gap-4 group">
+              <div className="p-3 bg-blue-500/10 rounded-lg group-hover:bg-blue-500/20 transition-colors">
+                <FaLocationDot className="text-blue-400 text-xl" />
+              </div>
+              <span className="text-gray-300">Novi Sad, Srbija</span>
+            </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <FaLocationDot color="red" size={20} />
-            <p>
-              {t("contact_location")}: Novi Sad
-            </p>
+          {/* Social Icons - Moderniji Hover */}
+          <div className="flex gap-4 pt-4">
+            {[
+              { icon: <FaInstagram />, link: "https://www.instagram.com/p.radic_/", color: "hover:text-pink-500" },
+              { icon: <FaGithub />, link: "https://github.com/Djapedjape123", color: "hover:text-white" },
+              { icon: <FaLinkedin />, link: "https://www.linkedin.com/in/predrag-radic-001478308/", color: "hover:text-blue-500" }
+            ].map((social, index) => (
+              <a
+                key={index}
+                href={social.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`text-2xl text-gray-400 ${social.color} transition-all transform hover:scale-110 p-2 bg-white/5 rounded-full`}
+              >
+                {social.icon}
+              </a>
+            ))}
           </div>
+        </motion.div>
 
-          {/* Social icons */}
-          <div className="flex gap-6 mt-4">
-            <a
-              href="https://www.instagram.com/p.radic_/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-pink-700 transition-colors text-4xl"
-            >
-              <FaInstagram />
-            </a>
-            <a
-              href="https://github.com/Djapedjape123"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-gray-600 transition-colors text-4xl"
-            >
-              <FaGithub />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/predrag-radic-001478308/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-blue-600 transition-colors text-4xl"
-            >
-              <FaLinkedin />
-            </a>
-          </div>
-        </div>
-
-        {/* Form */}
-        <form
+        {/* FORMA - Dark & Sleek */}
+        <motion.form
           onSubmit={onSubmit}
-          className="flex flex-col gap-4 w-full max-w-md bg-gray-800 p-6 rounded-xl shadow-lg"
+          className="flex flex-col gap-6 p-8 rounded-3xl bg-gray-900/50 border border-white/10 shadow-2xl relative overflow-hidden"
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
         >
-          <h1 className="text-blue-500 font-bold">{t("contact_form_title")}</h1>
+          {/* Suptilni glow efekat u pozadini forme */}
+          <div className="absolute -top-24 -right-24 w-48 h-48 bg-blue-600/10 blur-[80px] rounded-full" />
+          
+          <h3 className="text-xl font-bold text-white mb-2">{t("contact_form_title")}</h3>
 
-          <input
-            type="text"
-            name="name"
-            placeholder={t("contact_name")}
-            className="p-3 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
+          <div className="space-y-4 relative">
+            <input
+              type="text"
+              name="name"
+              placeholder={t("contact_name")}
+              className="w-full p-4 rounded-xl bg-white/5 border border-white/10 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all placeholder:text-gray-500"
+              required
+            />
 
-          <input
-            type="email"
-            name="email"
-            placeholder={t("contact_email")}
-            className="p-3 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
+            <input
+              type="email"
+              name="email"
+              placeholder={t("contact_email")}
+              className="w-full p-4 rounded-xl bg-white/5 border border-white/10 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all placeholder:text-gray-500"
+              required
+            />
 
-          <textarea
-            name="message"
-            rows="5"
-            placeholder={t("contact_message")}
-            className="p-3 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          ></textarea>
+            <textarea
+              name="message"
+              rows="4"
+              placeholder={t("contact_message")}
+              className="w-full p-4 rounded-xl bg-white/5 border border-white/10 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all placeholder:text-gray-500 resize-none"
+              required
+            ></textarea>
+          </div>
 
-          <button
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             type="submit"
-            className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-full text-white font-semibold shadow-md shadow-blue-600/50 transition-colors"
+            className="w-full py-4 bg-blue-600 hover:bg-blue-500 rounded-xl text-white font-bold tracking-wide shadow-lg shadow-blue-600/20 transition-all"
           >
             {t("contact_send")}
-          </button>
+          </motion.button>
 
           {result && (
-            <p className="text-center text-sm mt-2 text-green-400">{result}</p>
+            <motion.p 
+              initial={{ opacity: 0 }} 
+              animate={{ opacity: 1 }} 
+              className="text-center font-medium text-blue-400"
+            >
+              {result}
+            </motion.p>
           )}
-        </form>
-      </motion.div>
+        </motion.form>
+      </div>
     </section>
   );
 }
