@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 // Komponente
 import NavBar from "./components/NavBar";
 import Hero from "./components/Hero";
@@ -13,7 +14,6 @@ import splashImage from "./assets/logo.png"; //slika za uvod
 import { SiReact, SiExpress, SiTypescript, SiTailwindcss, SiMysql, SiMongodb, SiEjs } from "react-icons/si";
 import { FaInstagram, FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 
-
 const techLogos = [
   { node: <SiReact color="white"/>, title: "React", href: "https://react.dev" },
   { node: <SiExpress color="white"/>, title: "Express", href: "https://expressjs.com/" },
@@ -23,6 +23,7 @@ const techLogos = [
   { node: <SiMongodb color="white"/>, title: "MongoDB", href: "https://www.mongodb.com/" },
   { node: <SiEjs color="white"/>, title: "EJS", href: "https://ejs.co/" },
 ];
+
 const comercLogos = [
   { node: <FaInstagram color="purple"/>, title: "Insta", href: "https://www.instagram.com/p.radic_/" },
   { node: <FaGithub color="gray"/>, title: "GitHub", href: "https://github.com/Djapedjape123"},
@@ -43,6 +44,25 @@ function App() {
     };
   }, []);
 
+  // SEO: Strukturirani podaci (Schema.org) za Google
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Pedja Radić",
+    "jobTitle": "Full-Stack Developer",
+    "url": "https://tvoj-domen.com", // Zameni sa svojim domenom
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Novi Sad",
+      "addressCountry": "RS"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/in/predrag-radic-001478308/",
+      "https://github.com/Djapedjape123",
+      "https://www.instagram.com/p.radic_/"
+    ]
+  };
+
   if (loading) {
     return (
       <div
@@ -52,7 +72,7 @@ function App() {
       >
         <img
           src={splashImage}
-          alt="Uvodna slika"
+          alt="PrWeb Logo - Izrada sajtova Novi Sad" 
           className="w-full h-full object-cover"
         />
       </div>
@@ -60,15 +80,54 @@ function App() {
   }
 
   return (
-    <>
-      <NavBar />
-      <section id="hero"><Hero /></section>
-      <section id="about"><About /></section>
-      <section id="projects"><Projects /></section>
+    <HelmetProvider>
+      <Helmet>
+        {/* Primarni Meta Tagovi */}
+        <title>PrWeb | Pedja Radić - Full-Stack Developer Novi Sad</title>
+        <meta name="description" content="Profesionalna izrada sajtova i web aplikacija. Pedja Radić, Full-Stack developer iz Novog Sada, specijalizovan za React i Node.js." />
+        {/* Google Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
+      </Helmet>
 
-      
+      <header>
+        <NavBar />
+      </header>
 
-      <div
+      <main>
+        <section id="hero"><Hero /></section>
+        <section id="about"><About /></section>
+        <section id="projects"><Projects /></section>
+
+        {/* Tech Stack Loop */}
+        <div
+          style={{
+            width: "full",
+            marginLeft: "calc(-50vw + 50%)",
+            height: "100px",
+            position: "relative",
+            overflow: "hidden",
+            backgroundImage: "linear-gradient(to bottom, black, #111827)"
+          }}
+        >
+          <LogoLoop
+            logos={techLogos}
+            speed={100}
+            direction="right"
+            logoHeight={48}
+            gap={40}
+            hoverSpeed={0}
+            scaleOnHover
+            ariaLabel="Tehnologije koje koristim u radu"
+          />
+        </div>
+
+        <WhatIDo/>
+        <section id="contact"><Contact /></section>
+      </main>
+
+      <footer
         style={{
           width: "full",
           marginLeft: "calc(-50vw + 50%)",
@@ -76,32 +135,6 @@ function App() {
           position: "relative",
           overflow: "hidden",
           backgroundImage: "linear-gradient(to bottom, black, #111827)"
-
-        }}
-      >
-        <LogoLoop
-          logos={techLogos}
-          speed={100}
-          direction="right"
-          logoHeight={48}
-          gap={40}
-          hoverSpeed={0}
-          scaleOnHover
-          
-          ariaLabel="Technology partners"
-        />
-      </div>
-      <WhatIDo/>
-      <section id="contact"><Contact /></section>
-       <div
-        style={{
-          width: "full",
-          marginLeft: "calc(-50vw + 50%)",
-          height: "100px",
-          position: "relative",
-          overflow: "hidden",
-          backgroundImage: "linear-gradient(to bottom, black, #111827)"
-
         }}
       >
         <LogoLoop
@@ -112,12 +145,10 @@ function App() {
           gap={40}
           hoverSpeed={0}
           scaleOnHover
-          
-          ariaLabel="Technology partners"
+          ariaLabel="Moje društvene mreže i kontakt"
         />
-      </div>
-
-    </>
+      </footer>
+    </HelmetProvider>
   );
 }
 

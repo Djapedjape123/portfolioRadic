@@ -87,7 +87,7 @@ function Contact() {
           {/* Social Icons - Moderniji Hover */}
           <div className="flex gap-4 pt-4">
             {[
-              { icon: <FaInstagram />, link: "https://www.instagram.com/p.radic_/", color: "hover:text-pink-500" },
+              { icon: <FaInstagram />, link: "https://www.instagram.com/prweb_/", color: "hover:text-pink-500" },
               { icon: <FaGithub />, link: "https://github.com/Djapedjape123", color: "hover:text-white" },
               { icon: <FaLinkedin />, link: "https://www.linkedin.com/in/predrag-radic-001478308/", color: "hover:text-blue-500" }
             ].map((social, index) => (
