@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { FaHtml5, FaCss3Alt, FaJsSquare, FaReact, FaNodeJs } from "react-icons/fa";
+import { FaHtml5, FaCss3Alt, FaJsSquare, FaReact, FaNodeJs, FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 import { SiTailwindcss, SiExpress, SiEjs, SiMongodb, SiMysql } from "react-icons/si";
 import Carousel from "./Carousel";
+import { useTranslation } from "react-i18next";
 
+// Importi slika ostaju isti...
 import onlineShop from "../assets/nekretnineNsS.png";
 import hexa from "../assets/hexa.png";
 import event from "../assets/event.jpeg";
@@ -13,67 +15,64 @@ import masine from "../assets/Masine.png";
 const projects = [
   {
     name: "Masine.ai",
-    description: "Projekat za prodaju velikih gradjaviskih masina, rađen u ReactJS-u,TailwindCSS-u",
+    description: "Premium platforma za prodaju teške građevinske mehanizacije sa fokusom na UX i brzinu.",
     technologies: ["ReactJS", "TailwindCSS"],
     image: masine,
     site: "https://masine.ai/",
     github: "https://github.com/Djapedjape123/goga",
   },
   {
-    name: "Nekretnine",
-    description: "Projekat za agenciju za nekretnine, rađen u ReactJS-u,TailwindCSS-u,NodeJS-u i ExpressJS-u.",
+    name: "Serbes Nekretnine",
+    description: "Full-stack sistem za nekretnine sa automatizovanim XML uvozom podataka.",
     technologies: ["ReactJS", "TailwindCSS", "NodeJS", "ExpressJS"],
     image: onlineShop,
     site: "https://www.serbesnekretnine.com/",
     github: "https://github.com/Djapedjape123/nekretnineNs",
   },
   {
-    name: "Social-Network HEXA",
-    description: "Društvena mreža inspirisana Twitter-om koju sam pravio koristeći HTML, CSS i JavaScript.",
+    name: "HEXA Social Media",
+    description: "Konceptualna društvena mreža sa fokusom na real-time interakciju i čist dizajn.",
     technologies: ["HTML", "CSS", "JavaScript"],
     image: hexa,
     demo: "https://social-network-main-ten.vercel.app/",
     github: "https://github.com/Djapedjape123/SocialNetwork-main",
   },
   {
-    name: "Todo_list",
-    description: "Lista zatataka za zaposlene.",
+    name: "Task Master",
+    description: "Sistem za upravljanje zadacima i zaposlenima baziran na MongoDB bazi.",
     technologies: ["NodeJS", "ExpressJS", "EJS", "MongoDB"],
     image: todo,
     demo: "https://todo-app-chi-ivory-48.vercel.app/",
     github: "https://github.com/Djapedjape123/todo_app",
   },
   {
-    name: "E-Comerc Event App",
-    description: "Sajt za organizaciju i prodaju događaja, rađen u backend tehnologijama.",
+    name: "Event Hub",
+    description: "E-commerce rešenje za organizaciju događaja i prodaju karata.",
     technologies: ["NodeJS", "ExpressJS", "EJS", "MongoDB"],
     image: event,
     github: "https://github.com/zile028/event_app",
   },
-  
-  
 ];
 
 const techIcons = {
-  HTML: <FaHtml5 className="text-orange-600 text-xl" />,
-  CSS: <FaCss3Alt className="text-blue-600 text-xl" />,
-  JavaScript: <FaJsSquare className="text-yellow-400 text-xl" />,
-  ReactJS: <FaReact className="text-blue-400 text-xl" />,
-  TailwindCSS: <SiTailwindcss className="text-teal-400 text-xl" />,
-  NodeJS: <FaNodeJs className="text-green-600 text-xl" />,
-  ExpressJS: <SiExpress className="text-white text-xl" />,
-  EJS: <SiEjs className="text-gray-300 text-xl" />,
-  MySQL: <SiMysql className="text-blue-700 text-xl" />,
-  MongoDB: <SiMongodb className="text-green-500 text-xl" />,
+  HTML: <FaHtml5 className="text-[#E34F26]" />,
+  CSS: <FaCss3Alt className="text-[#1572B6]" />,
+  JavaScript: <FaJsSquare className="text-[#F7DF1E]" />,
+  ReactJS: <FaReact className="text-[#61DAFB]" />,
+  TailwindCSS: <SiTailwindcss className="text-[#06B6D4]" />,
+  NodeJS: <FaNodeJs className="text-[#339933]" />,
+  ExpressJS: <SiExpress className="text-white" />,
+  EJS: <SiEjs className="text-[#A91E50]" />,
+  MySQL: <SiMysql className="text-[#4479A1]" />,
+  MongoDB: <SiMongodb className="text-[#47A248]" />,
 };
 
 function Projects() {
+  const { t } = useTranslation();
   const [itemWidth, setItemWidth] = useState(window.innerWidth - 32);
 
   useEffect(() => {
-    const handleResize = () => {
-      setItemWidth(window.innerWidth - 32);
-    };
+    const handleResize = () => setItemWidth(window.innerWidth - 32);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -81,95 +80,99 @@ function Projects() {
   return (
     <section
       id="projects"
-      className="
-       relative
-        md:max-h-90
-        bg-gradient-to-b from-gray-900 to-black
-        text-white
-        flex flex-col items-center justify-start
-        px-4 py-16
-        scroll-margin-top-20
-       
-      "
-       style={{ scrollMarginTop: "5rem" }}
+      className="relative bg-gradient-to-b from-gray-900 to-black text-white py-24 px-4 overflow-hidden"
+      style={{ scrollMarginTop: "4rem" }}
     >
-     <h1 className="absolute text-blue-500 top-4 md:top-6 left-1/2 transform -translate-x-1/2 text-2xl font-bold z-10">
-        My Projects
-      </h1>
-      <div className="w-full">
-        <Carousel autoplay={true} autoplayDelay={4000} loop={true} itemWidth={itemWidth} gap={0}>
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              className="bg-gray-800 rounded-2xl overflow-hidden shadow-2xl hover:scale-105 transition-transform duration-300 cursor-pointer mx-auto w-[80%] md:w-[40%] lg:w-[35%]"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              {/* Slika */}
-              <div className="h-64 sm:h-72 md:h-60 lg:h-56 w-full bg-gray-700 flex items-center justify-center">
-                <img src={project.image} alt={project.name} className="w-full h-full object-cover" />
-              </div>
+      {/* Dekorativni pozadinski sjaj */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/10 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-600/10 blur-[120px] rounded-full pointer-events-none" />
 
-              {/* Tekst */}
-              <div className="p-4 sm:p-5 md:p-6 lg:p-6 flex flex-col gap-2">
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-blue-400">
-                  {project.name}
-                </h3>
+      <div className="max-w-7xl mx-auto flex flex-col items-center">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-sm uppercase tracking-[0.3em] text-blue-500 font-semibold mb-2">Portfolio</h2>
+          <h1 className="text-4xl md:text-5xl font-black tracking-tight">
+            {t("izabrani")} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">{t("projekti")}</span>
+          </h1>
+        </motion.div>
 
-                <p className="text-gray-300 text-sm sm:text-base md:text-lg">
-                  {project.description}
-                </p>
-
-                {/* Tehnologije */}
-                <div className="flex flex-wrap gap-2 mt-2">
-                  {project.technologies.map((tech, i) => (
-                    <div key={i} className="flex items-center gap-1 text-sm sm:text-base">
-                      {techIcons[tech]}
-                      <span>{tech}</span>
-                    </div>
-                  ))}
+        <div className="w-full">
+          <Carousel autoplay={true} autoplayDelay={5000} loop={true} itemWidth={itemWidth} gap={0}>
+            {projects.map((project, index) => (
+              <motion.div
+                key={index}
+                className="group relative bg-white/5 border border-white/10 rounded-[2rem] overflow-hidden backdrop-blur-md mx-auto w-[90%] md:w-[45%] lg:w-[38%] transition-all duration-500 hover:border-blue-500/50 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)]"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+              >
+                {/* Image Container with Overlay */}
+                <div className="relative h-64 overflow-hidden">
+                  <img 
+                    src={project.image} 
+                    alt={project.name} 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[20%] group-hover:grayscale-0" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-80" />
                 </div>
 
-                {/* Dugmad */}
-                <div className="flex flex-wrap gap-2 mt-4">
-                  {project.demo && (
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-full text-white font-semibold shadow-lg shadow-blue-600/50 transition-colors"
-                    >
-                      Demo
-                    </a>
-                  )}
+                {/* Content */}
+                <div className="p-8 flex flex-col gap-4">
+                  <h3 className="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
+                    {project.name}
+                  </h3>
 
-                  {project.site && (
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-full text-white font-semibold shadow-lg shadow-blue-600/50 transition-colors"
-                    >
-                      Site
-                    </a>
-                  )}
+                  <p className="text-gray-400 text-sm leading-relaxed line-clamp-2">
+                    {project.description}
+                  </p>
 
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-6 py-3 bg-gray-700 hover:bg-gray-600 rounded-full text-white font-semibold shadow-lg shadow-gray-700/50 transition-colors"
-                    >
-                      GitHub
-                    </a>
-                  )}
+                  {/* Tech Pills */}
+                  <div className="flex flex-wrap gap-2 py-2">
+                    {project.technologies.map((tech, i) => (
+                      <span 
+                        key={i} 
+                        className="flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-gray-300"
+                      >
+                        {techIcons[tech]}
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="flex items-center gap-4 mt-4">
+                    {(project.demo || project.site) && (
+                      <a
+                        href={project.site || project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold rounded-xl transition-all shadow-lg shadow-blue-600/20"
+                      >
+                        Pogledaj <FaExternalLinkAlt size={12} />
+                      </a>
+                    )}
+
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-white transition-all"
+                        title="GitHub Code"
+                      >
+                        <FaGithub size={20} />
+                      </a>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
-        </Carousel>
+              </motion.div>
+            ))}
+          </Carousel>
+        </div>
       </div>
     </section>
   );

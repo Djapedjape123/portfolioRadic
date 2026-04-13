@@ -9,6 +9,8 @@ const resources = {
       nav_about: "O meni",
       nav_projects: "Projekti",
       nav_contact: "Kontakt",
+      izabrani:"Izabrani",
+      projekti:"Projekti",
 
       hero_typing1: "Dobrodošli",
       hero_typing2: "Za vaše sajtove",
@@ -60,6 +62,8 @@ const resources = {
       nav_about: "About",
       nav_projects: "Projects",
       nav_contact: "Contact",
+      izabrani:"Selected",
+      projekti:"Projects",
 
       hero_typing1: "Welcome",
       hero_typing2: "For your websites",
