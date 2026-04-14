@@ -110,8 +110,8 @@ function Projects() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
               >
-                {/* Image Container with Overlay */}
-                <div className="relative h-64 overflow-hidden">
+                {/* Image Container with Overlay - Smanjeno na h-48 za mobilne, h-64 na desktopu */}
+                <div className="relative h-48 md:h-64 overflow-hidden">
                   <img 
                     src={project.image} 
                     alt={project.name} 
@@ -120,22 +120,22 @@ function Projects() {
                   <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-80" />
                 </div>
 
-                {/* Content */}
-                <div className="p-8 flex flex-col gap-4">
-                  <h3 className="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
+                {/* Content - Smanjen padding i razmaci na mobilnom */}
+                <div className="p-5 md:p-8 flex flex-col gap-3 md:gap-4">
+                  <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
                     {project.name}
                   </h3>
 
-                  <p className="text-gray-400 text-sm leading-relaxed line-clamp-2">
+                  <p className="text-gray-400 text-xs md:text-sm leading-relaxed line-clamp-2">
                     {project.description}
                   </p>
 
-                  {/* Tech Pills */}
-                  <div className="flex flex-wrap gap-2 py-2">
+                  {/* Tech Pills - Sitniji font i manji padding na mobilnom */}
+                  <div className="flex flex-wrap gap-1.5 md:gap-2 py-1 md:py-2">
                     {project.technologies.map((tech, i) => (
                       <span 
                         key={i} 
-                        className="flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-gray-300"
+                        className="flex items-center gap-1.5 md:gap-2 px-2.5 py-1 md:px-3 border border-white/10 rounded-full text-[10px] md:text-xs font-medium text-gray-300 bg-white/5"
                       >
                         {techIcons[tech]}
                         {tech}
@@ -143,14 +143,14 @@ function Projects() {
                     ))}
                   </div>
 
-                  {/* Action Buttons */}
-                  <div className="flex items-center gap-4 mt-4">
+                  {/* Action Buttons - Kompaktnija dugmad na mobilnom */}
+                  <div className="flex items-center gap-3 md:gap-4 mt-2 md:mt-4">
                     {(project.demo || project.site) && (
                       <a
                         href={project.site || project.demo}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold rounded-xl transition-all shadow-lg shadow-blue-600/20"
+                        className="flex items-center gap-2 px-4 py-2.5 md:px-6 md:py-3 bg-blue-600 hover:bg-blue-500 text-white text-xs md:text-sm font-bold rounded-xl transition-all shadow-lg shadow-blue-600/20"
                       >
                         Pogledaj <FaExternalLinkAlt size={12} />
                       </a>
@@ -161,10 +161,10 @@ function Projects() {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-white transition-all"
+                        className="p-2.5 md:p-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-white transition-all"
                         title="GitHub Code"
                       >
-                        <FaGithub size={20} />
+                        <FaGithub className="text-lg md:text-xl" />
                       </a>
                     )}
                   </div>

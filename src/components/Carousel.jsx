@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useMotionValue } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 export default function Carousel({
   children,
@@ -12,9 +12,23 @@ export default function Carousel({
 }) {
   const items = React.Children.toArray(children);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const x = useMotionValue(0);
   const containerRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
+  
+  // State koji prati da li smo na mobilnom uređaju
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Provera veličine ekrana
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768); // Granica za mobilni/tablet
+    };
+    
+    checkMobile(); // Provera pri prvom učitavanju
+    window.addEventListener('resize', checkMobile); // Provera pri promeni veličine prozora
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Autoplay effect
   useEffect(() => {
@@ -32,6 +46,18 @@ export default function Carousel({
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
 
+  // LOGIKA ZA DRAG / SWIPE
+  const handleDragEnd = (event, info) => {
+    if (!isMobile) return; // Ako nije mobilni, ignorisi prevlačenje
+
+    const swipeThreshold = 50; 
+    if (info.offset.x < -swipeThreshold) {
+      setCurrentIndex((prev) => (prev + 1) % items.length);
+    } else if (info.offset.x > swipeThreshold) {
+      setCurrentIndex((prev) => (prev === 0 ? items.length - 1 : prev - 1));
+    }
+  };
+
   return (
     <div
       ref={containerRef}
@@ -41,7 +67,14 @@ export default function Carousel({
     >
       {/* Carousel track */}
       <motion.div
-        className="flex"
+        // Kursor za prevlačenje se pojavljuje samo na mobilnom
+        className={`flex ${isMobile ? 'cursor-grab active:cursor-grabbing' : ''}`} 
+        
+        drag={isMobile ? "x" : false} // Ako je mobilni aktiviraj prevlačenje, inače ugasi (false)
+        
+        dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={0.2}
+        onDragEnd={handleDragEnd}
         animate={{ x: -currentIndex * (itemWidth + gap) }}
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       >
@@ -53,11 +86,11 @@ export default function Carousel({
       </motion.div>
 
       {/* Navigation dots */}
-      <div className="absolute bottom-2 w-full flex justify-center gap-2">
+      <div className="absolute bottom-2 w-full flex justify-center gap-2 pointer-events-none">
         {items.map((_, i) => (
           <motion.div
             key={i}
-            className={`h-2 w-2 rounded-full cursor-pointer ${
+            className={`h-2 w-2 rounded-full cursor-pointer pointer-events-auto ${
               i === currentIndex ? 'bg-blue-500' : 'bg-gray-500'
             }`}
             onClick={() => setCurrentIndex(i)}
