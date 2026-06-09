@@ -10,7 +10,7 @@ import { SiTailwindcss, SiExpress, SiMysql, SiMongodb, SiEjs } from "react-icons
 import { useTranslation } from "react-i18next";
 
 export default function About() {
-  const { t } = useTranslation(); // <-- dodato
+  const { t } = useTranslation(); 
 
   return (
     <section
