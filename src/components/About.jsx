@@ -2,15 +2,16 @@ import React from "react";
 import { motion } from "framer-motion";
 import profilePic from "../assets/slikaPedja.jpeg";
 import logo from "../assets/logo.png";
+import cvFile from "../assets/Predrag_Radic_CV.pdf"; // <-- DODATO: Putanja do tvog CV fajla
 
 // React Icons
-import { FaHtml5, FaCss3Alt, FaJsSquare, FaReact, FaNodeJs } from "react-icons/fa";
+import { FaHtml5, FaCss3Alt, FaJsSquare, FaReact, FaNodeJs, FaDownload } from "react-icons/fa"; // <-- DODATO: FaDownload
 import { SiTailwindcss, SiExpress, SiMysql, SiMongodb, SiEjs } from "react-icons/si";
 
 import { useTranslation } from "react-i18next";
 
 export default function About() {
-  const { t } = useTranslation(); 
+  const { t } = useTranslation();
 
   return (
     <section
@@ -110,6 +111,18 @@ export default function About() {
             <SiMongodb className="text-green-500 text-3xl" />
             <span className="text-sm mt-1">MongoDB</span>
           </div>
+        </div>
+
+        {/* <-- DODATO: Moderno neon dugme za preuzimanje CV-a --> */}
+        <div className="mt-4">
+          <a
+            href={cvFile}
+            download="Predrag_Radic_CV.pdf"
+            className="inline-flex items-center gap-3 px-8 py-3 rounded-full border-2 border-blue-500 text-blue-500 font-bold uppercase tracking-widest bg-transparent hover:bg-blue-500 hover:text-white hover:shadow-[0_0_20px_#3b82f6] transition-all duration-300 ease-in-out group w-max"
+          >
+            {t("download_cv", "Preuzmi CV")}
+            <FaDownload className="text-lg group-hover:-translate-y-1 transition-transform duration-300" />
+          </a>
         </div>
       </motion.div>
     </section>
