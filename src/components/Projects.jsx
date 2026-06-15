@@ -52,6 +52,14 @@ const projects = [
     image: event,
     github: "https://github.com/zile028/event_app",
   },
+   {
+    name: "Bircuz Lipa 1880",
+    description: "Moderan sajt za kafic sa fokusam na njegovu istoriju,priču i ponudu.",
+    technologies: ["ReactJS", "TailwindCSS"],
+    image: "https://res.cloudinary.com/duomot4hp/image/upload/q_auto/f_auto/v1777931592/lipalogo_ha5sow.jpg",
+    site: "https://bircuzlipa1880.com/",
+    github: "https://github.com/Djapedjape123/lipaBircuz",
+  },
 ];
 
 const techIcons = {
