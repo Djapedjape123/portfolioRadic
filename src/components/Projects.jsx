@@ -60,6 +60,14 @@ const projects = [
     site: "https://bircuzlipa1880.com/",
     github: "https://github.com/Djapedjape123/lipaBircuz",
   },
+  {
+    name: "AI za pravnike",
+    description: "Ai namenjan pravnicima za lakse i brze pretrage dokumenata i zakona.",
+    technologies: ["NextJS", "TailwindCSS","TypeScript","ClaudAPI","VoyageAPI"],
+    image: "https://res.cloudinary.com/duomot4hp/image/upload/v1788462880/ai_g9k6wb.png",
+    site: "https://ai-chatbot-2qmj.vercel.app/",
+    github: "https://github.com/Djapedjape123/ai_chatbot",
+  },
 ];
 
 const techIcons = {

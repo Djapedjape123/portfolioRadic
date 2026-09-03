@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import profilePic from "../assets/slikaPedja.jpeg";
 import logo from "../assets/logo.png";
-import cvFile from "../assets/Predrag_Radic_CV.pdf"; // <-- DODATO: Putanja do tvog CV fajla
+import cvFile from "../assets/Predrag_Radic_CV-1.pdf"; // <-- DODATO: Putanja do tvog CV fajla
 
 // React Icons
 import { FaHtml5, FaCss3Alt, FaJsSquare, FaReact, FaNodeJs, FaDownload } from "react-icons/fa"; // <-- DODATO: FaDownload
